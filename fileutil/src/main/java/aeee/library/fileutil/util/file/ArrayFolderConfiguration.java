@@ -8,12 +8,12 @@ class ArrayFolderConfiguration implements FolderConfiguration {
     private final int [] depths;
     private final Path root;
 
-    ArrayFolderConfiguration(FolderProperty folderProperties) {
-        int [] depths = folderProperties.getProperty();
+    ArrayFolderConfiguration(FolderProperty folderProperty) {
+        int [] depths = folderProperty.getProperty();
         assert depths != null;
 
         this.depths = depths;
-        this.root = Paths.get(folderProperties.getFolderType().getFolderName());
+        this.root = Paths.get(folderProperty.getFolderType().getFolderName());
     }
 
     @Override
