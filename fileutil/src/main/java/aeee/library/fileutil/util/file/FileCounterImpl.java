@@ -1,8 +1,8 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import java.nio.file.Path;
 
-class FileCounterImpl implements FolderComposite, PathCounter{
+class FileCounterImpl implements PathComposite {
 
     private int maxCount;
     private int currentCount;

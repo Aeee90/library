@@ -1,11 +1,11 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import java.nio.file.Path;
 
 class RootCounterImpl implements PathCounterFacade {
 
     private Path root;
-    private PathCounter child;
+    private PathComposite child;
     private boolean isNotInitialize = true;
 
     public RootCounterImpl(FolderConfiguration folderConfiguration) {

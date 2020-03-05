@@ -1,9 +1,9 @@
 package aeee.library.fileutil.service;
 
 import aeee.library.fileutil.dao.FileDao;
-import aeee.library.fileutil.util.FileAttribute;
-import aeee.library.fileutil.util.FileUtil;
-import aeee.library.fileutil.util.FolderType;
+import aeee.library.fileutil.util.file.FileAttribute;
+import aeee.library.fileutil.util.file.FileUtil;
+import aeee.library.fileutil.config.FolderTypeImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +24,7 @@ public class FileService {
         else return FileUtil.getAbsolutePathFile(fileAttribute.directoryPath.toString(), fileAttribute.hashName);
     }
 
-    public Long addFile(FolderType folderType, MultipartFile file) {
+    public Long addFile(FolderTypeImpl folderType, MultipartFile file) {
         FileAttribute fileAttribute = FileUtil.write(folderType, file);
         return fileDao.save(fileAttribute);
     }

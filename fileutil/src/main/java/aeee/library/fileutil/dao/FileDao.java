@@ -1,6 +1,6 @@
 package aeee.library.fileutil.dao;
 
-import aeee.library.fileutil.util.FileAttribute;
+import aeee.library.fileutil.util.file.FileAttribute;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

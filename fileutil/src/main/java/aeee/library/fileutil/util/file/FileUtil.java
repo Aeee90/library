@@ -1,5 +1,8 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
+import aeee.library.fileutil.config.FolderTypeImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -12,20 +15,30 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Configuration
 public class FileUtil {
 
-    private static FileStorageManager fileStorageManager;
+    private static FileStorageManagerImpl fileStorageManager;
 
-    private static FileStorageManager getFileStorageManager() {
-        if(fileStorageManager == null) fileStorageManager = new SpringFileStorageManager();
+    private static FileStorageManager getFileStorageManager(){
+        if(fileStorageManager == null) {
+            ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
+            FileUtilConfiguration fileUtilConfiguration = applicationContext.getBean(FileUtilConfiguration.class);
+
+            fileStorageManager = new FileStorageManagerImpl();
+            fileUtilConfiguration.configuration(fileStorageManager);
+        }
+
         return fileStorageManager;
     }
 
-    public static List<FileAttribute> write(FolderType folderType, List<MultipartFile> files){
+    public static List<FileAttribute> write(FolderTypeImpl folderType, List<MultipartFile> files){
         return files.stream().map( file -> write(folderType, file)).collect(Collectors.toList());
     }
 
-    public static FileAttribute write(FolderType folderType, MultipartFile file){
+    public static FileAttribute write(FolderTypeImpl folderType, MultipartFile file){
+        if(file == null) return FileAttribute.EMPTY;
+
         String originalName = file.getOriginalFilename();
         String hashName = generateStringHashName(file);
 
@@ -38,7 +51,7 @@ public class FileUtil {
         Path absolutePath =  directoryPath.resolve(Paths.get(hashName));
 
         try{
-            if(write(new File(absolutePath.toUri()), file.getBytes(), directory))
+            if(write(new File(absolutePath.toUri()), file.getBytes()))
                 return new FileAttribute(originalName, hashName, localDirectoryPath);
             else
                 return FileAttribute.EMPTY;
@@ -47,7 +60,7 @@ public class FileUtil {
         }
     }
 
-    private static boolean write(File file, byte [] data, File directory){
+    private static boolean write(File file, byte [] data){
         if(file != null) {
             try(FileOutputStream fOut = new FileOutputStream(file)) {
                 fOut.write(data);

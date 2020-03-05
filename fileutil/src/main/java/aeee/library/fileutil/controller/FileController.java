@@ -1,7 +1,7 @@
 package aeee.library.fileutil.controller;
 
 import aeee.library.fileutil.service.FileService;
-import aeee.library.fileutil.util.FolderType;
+import aeee.library.fileutil.config.FolderTypeImpl;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @GetMapping(value = "/image/{idx}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/{idx}", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte []  getImage(
             @PathVariable("idx") Long idx
     ) throws IOException {
@@ -29,8 +29,8 @@ public class FileController {
         else return null;
     }
 
-    @PostMapping(value = "/image")
+    @PostMapping
     public String addImage(MultipartFile file) {
-        return "/image/" + fileService.addFile(FolderType.Article, file);
+        return "/image/" + fileService.addFile(FolderTypeImpl.ARTICLE, file);
     }
 }

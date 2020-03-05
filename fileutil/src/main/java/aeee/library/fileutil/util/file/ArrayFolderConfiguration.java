@@ -1,4 +1,4 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,9 +8,12 @@ class ArrayFolderConfiguration implements FolderConfiguration {
     private final int [] depths;
     private final Path root;
 
-    ArrayFolderConfiguration(FolderProperties folderProperties, FolderType folderType) {
-        this.depths = folderProperties.getProperty(folderType);
-        this.root = Paths.get(folderType.toString());
+    ArrayFolderConfiguration(FolderProperty folderProperties) {
+        int [] depths = folderProperties.getProperty();
+        assert depths != null;
+
+        this.depths = depths;
+        this.root = Paths.get(folderProperties.getFolderType().getFolderName());
     }
 
     @Override

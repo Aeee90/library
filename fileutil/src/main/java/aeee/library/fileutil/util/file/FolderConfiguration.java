@@ -1,4 +1,4 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import java.nio.file.Path;
 

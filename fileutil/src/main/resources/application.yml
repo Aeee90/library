@@ -1,0 +1,7 @@
+file:
+  util:
+    tree:
+      root: /Users/aeee/IdeaProjects/library/local-images
+      article:  100,100,100
+      request:  100,100,100
+      profile:  100,100,100

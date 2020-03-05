@@ -1,19 +1,19 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class FolderCounterImpl implements FolderComposite, PathCounter {
+class FolderCounterImpl implements PathComposite {
 
     private String INIT_DATE_HASH;
     private boolean isNotInitialize = true;
-    private PathCounter child;
+    private PathComposite child;
     private int maxCount;
     private int currentCount;
 
 
     FolderCounterImpl() {
-        INIT_DATE_HASH = PathCounter.getInitDate();
+        INIT_DATE_HASH = PathComposite.getInitDate();
     }
 
 
@@ -41,7 +41,7 @@ class FolderCounterImpl implements FolderComposite, PathCounter {
     public boolean isFull() {
         if(currentCount >= maxCount) {
             currentCount = 0;
-            INIT_DATE_HASH = PathCounter.getInitDate();
+            INIT_DATE_HASH = PathComposite.getInitDate();
             return true;
         } else return false;
     }

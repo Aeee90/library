@@ -1,4 +1,4 @@
-package aeee.library.fileutil.util;
+package aeee.library.fileutil.util.file;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
