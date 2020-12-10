@@ -11,5 +11,5 @@ FolderProperties.of("Article", {100,100,100})
 2. FileUtil 객체를 통해서 File을 write, delete, get 할 수 있습니다.
 
 
-## Github Bot with kakaowork
+## Github Bot with Kakaowork
 
